@@ -38,7 +38,7 @@
             return localStorage.setObject(key, value);
         }
 
-        function getObject(key, value) {
+        function getObject(key, defaultValue) {
             if(angular.isDefined(cache._map[key])) {
                 return $q.when(cache._map[key]);
             }else{
