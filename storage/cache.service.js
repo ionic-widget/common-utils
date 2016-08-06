@@ -4,8 +4,8 @@
     angular.module('lh.commons.storage')
     .service('localCacheStorage', LocalCacheStorage);
 
-    LocalCacheStorage.$inject = ['localStorage'];
-    function LocalCacheStorage(localStorage) {
+    LocalCacheStorage.$inject = ['localStorage', '$q'];
+    function LocalCacheStorage(localStorage, $q) {
         var cache = this;
         //private
         cache._map = {};

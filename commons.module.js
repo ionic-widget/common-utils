@@ -1,3 +1,5 @@
 angular.module('lh.commons', [
-    'lh.commons.storage'
+    'lh.commons.util',
+    'lh.commons.storage',
+    'lh.commons.modal'
 ]);
