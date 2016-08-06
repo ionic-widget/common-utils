@@ -73,7 +73,7 @@
                     }, errorHandler.bind(null, fileName, defer));
                 }, errorHandler.bind(null, fileName, defer));
             }, errorHandler.bind(null, fileName, defer));
-            return defer;
+            return defer.promise;
         }
         function errorHandler(fileName, defer, e) {
             var msg = '';
@@ -116,7 +116,7 @@
                     reader.readAsText(file);
                 }, errorHandler.bind(null, fileName, defer));
             }, errorHandler.bind(null, fileName, defer));
-            return defer;
+            return defer.promise;
         }
     }
 })();
