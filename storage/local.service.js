@@ -14,7 +14,7 @@
         };
 
         function set(key, value) {
-            return save(key, value);
+            return save(key, value).then(function(){ return value; });
         }
 
         function get(key, defaultValue) {
@@ -23,7 +23,7 @@
         }
 
         function setObject(key, value) {
-            return save(key, lhJSON.stringify(value));
+            return save(key, lhJSON.stringify(value)).then(function(){ return value; });
         }
 
         function getObject(key, defaultValue) {

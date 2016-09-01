@@ -29,7 +29,8 @@
             scope.$on('modal.hidden', onModalHidden);
             scope.$on('modal.removed', onModalRemoved);
 
-            function showModal(){
+            function showModal(obj){
+                _.assign(scope, obj);
                 scope._modal.show();
             }
             function closeModal(){
@@ -62,8 +63,9 @@
                 self.wrapScopeWithModal(scope, modal);
             });
             function showModal(){
+                var arg = arguments;
                 promise.then(function(){
-                    scope.showModal();
+                    scope.showModal.apply(null, arg);
                 });
             }
             function hideModal(){
