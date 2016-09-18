@@ -4,8 +4,8 @@
     angular.module('lh.commons.modal')
     .service('ModalService', ModalService);
 
-    ModalService.$inject = ['$injector', '$ionicModal'];
-    function ModalService($injector, $ionicModal){
+    ModalService.$inject = ['$injector', '$ionicModal', '$q'];
+    function ModalService($injector, $ionicModal, $q){
         return { wrapController: wrapController,
                  wrapScopeWithModal: wrapScopeWithModal,
                  createModal: createModal,
@@ -36,8 +36,9 @@
             function closeModal(){
                 var val = scope._closeModal();
                 if(!angular.isDefined(val) || val){
-                    scope._modal.hide();
+                    return scope._modal.hide();
                 }
+                return $q.reject();
             }
             function onDestroy() {
                 $scope.modal.remove();
