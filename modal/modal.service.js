@@ -31,12 +31,15 @@
 
             function showModal(obj){
                 _.assign(scope, obj);
-                scope._modal.show();
+                scope._closeModalDefer = $q.defer();
+                return scope._modal.show().then(function(){
+                    return scope._closeModalDefer.promise;
+                });
             }
             function closeModal(){
                 var val = scope._closeModal();
                 if(!angular.isDefined(val) || val){
-                    return scope._modal.hide();
+                    return scope._modal.hide().then(scope._closeModalDefer.resolve);
                 }
                 return $q.reject();
             }
@@ -65,13 +68,13 @@
             });
             function showModal(){
                 var arg = arguments;
-                promise.then(function(){
-                    scope.showModal.apply(null, arg);
+                return promise.then(function(){
+                    return scope.showModal.apply(null, arg);
                 });
             }
             function hideModal(){
-                promise.then(function(){
-                    scope.closeModal();
+                return promise.then(function(){
+                    return scope.closeModal();
                 });
             }
             return {
